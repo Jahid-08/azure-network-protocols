@@ -110,11 +110,49 @@ Now we’ll set up the **Windows 10 VM** that will be used to observe and test n
 
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img width="719" alt="image" src="https://github.com/user-attachments/assets/f8c459d6-afcc-457c-b77a-3a13fd1c0f10" />
 </p>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
+
+### 🐧 Step 3: Create the Linux (Ubuntu) Virtual Machine
+
+Next, we'll create a **Linux (Ubuntu)** VM to interact with our Windows VM in the same network.
+
+---
+
+#### 🔍 Navigate to Virtual Machines
+
+1. In the Azure portal, go to **"Virtual machines"** again.
+2. Click **➕ Create** to begin setting up your second VM.
+
+---
+
+#### ⚙️ Configuration Settings
+
+- **Resource Group:** `RG-Network-Activities` (same as before)
+- **Virtual Machine Name:** `linux-vm`
+- **Region:** `East US 2`
+- **Image:** `Ubuntu Server 22.04 LTS - x64 Gen2`
+- **Authentication Type:** `Password`
+- **Username:** `labuser`
+- **Password:** `Cyberlab123!`
+- ❌ No need to check any licensing box
+
+---
+
+#### 🌐 Networking Setup
+
+- Under **Virtual Network**, select:
+  - `Network-Activities-Vnet` (same VNet used for the Windows VM)
+
+---
+
+#### 🚀 Final Steps
+
+- Click **Review + Create**
+- Then click **Create** to deploy your Ubuntu VM
+
+> 💡 *It's important that both VMs share the same Resource Group and Virtual Network so they can communicate with each other during the lab.*</p>
 <br />
 <br />
 <br />
