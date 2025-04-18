@@ -159,10 +159,45 @@ Next, we'll create a **Linux (Ubuntu)** VM to interact with our Windows VM in th
 
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img width="957" alt="image" src="https://github.com/user-attachments/assets/92b4578c-e629-4f98-8f7c-db67d3da9ab7" />
 </p>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+### 🔐 Step 4: Connect to the Windows VM via Remote Desktop (RDP)
+
+Now that both VMs are created, we’ll connect to the **Windows VM** using **Remote Desktop** so we can begin inspecting **ICMP traffic**.
+
+---
+
+#### 🧭 Find the Public IP Address
+
+1. In the Azure portal, navigate to **Virtual Machines**.
+2. Select your VM: `windows-vm`
+3. Copy the **Public IP address** listed in the VM overview.
+
+---
+
+#### 🖥️ Connect via RDP
+
+1. On your local Windows machine, open the **Start Menu**.
+2. Type and open **"Remote Desktop Connection"** (or just `RDP`).
+3. Paste the **public IP address** into the Computer field.
+4. Click **Connect**.
+5. When prompted, log in with:
+   - **Username:** `labuser`
+   - **Password:** `Cyberlab123!`
+
+---
+
+#### 🧪 Install WireShark
+
+Once you're inside the Windows VM:
+
+1. Open a browser and go to [https://www.wireshark.org/](https://www.wireshark.org/)
+2. Download and install **WireShark**.
+3. We’ll use this tool to inspect **ICMP (ping)** traffic between the Windows and Linux VMs.
+
+> 💡 *WireShark is a powerful packet analysis tool that allows us to see what's happening on the network in real-time.*
 </p>
 <br />
 <br />
