@@ -205,10 +205,61 @@ Once you're inside the Windows VM:
 
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img width="941" alt="image" src="https://github.com/user-attachments/assets/60eb0523-b147-481e-91d1-fca497624565" />
 </p>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+### 🧪 Step 5: Capture ICMP Traffic with Wireshark
+
+Now we’ll begin analyzing **ICMP traffic** (ping requests/replies) using **Wireshark** on the Windows VM.
+
+---
+
+#### ▶️ Start a Packet Capture in Wireshark
+
+1. On your Windows VM, open **WireShark**.
+2. Click on the active **Ethernet interface** (usually the one with activity bars).
+3. Click the **🦈 shark fin icon** in the top-left corner to begin capturing packets.
+
+> 🧠 You’ll now see a stream of real-time network traffic — don’t worry if it looks overwhelming!
+
+---
+
+#### 🔍 Filter for ICMP Traffic
+
+1. At the top of the Wireshark window, find the **display filter bar**.
+2. Type:  icmp
+
+This will filter for only **ICMP traffic** (used by the `ping` command).
+
+> ⚠️ It might be empty right now — that's because we haven’t pinged anything yet!
+
+---
+
+#### 🌐 Retrieve the Private IP of the Linux VM
+
+1. In Azure, go to the **Virtual Machines** section.
+2. Click on `linux-vm`
+3. Go to the **Networking** tab and locate the **Private IP address**  
+- 📌 In our case: `10.1.0.5`
+
+---
+
+#### 🏓 Ping the Linux VM from Windows
+
+1. On your Windows VM, open **PowerShell**.
+2. Type the following command: ping 10.1.0.5
+
+You should see successful replies in PowerShell.
+
+💥 In Wireshark, ICMP traffic will now appear:
+
+Ping requests from the Windows VM’s IP
+
+Ping replies from the Linux VM’s IP
+
+💡 Ping is a simple yet powerful tool to verify network connectivity and measure response times between devices in an IP network.
+
 </p>
 <br />
 <br />
