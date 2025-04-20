@@ -267,10 +267,49 @@ Ping replies from the Linux VM’s IP
 
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img width="946" alt="image" src="https://github.com/user-attachments/assets/1a11d2f0-8cae-422e-a9da-af8974613824" />
 </p>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+### 🔎 Step 6: Inspect ICMP Packet Details in Wireshark
+
+Now that we’ve captured ICMP traffic between the Windows and Linux VMs, let’s dig into the packet structure to understand what’s really happening under the hood.
+
+---
+
+#### 🧬 Expand Packet Headers in Wireshark
+
+When you click on a captured packet in Wireshark, you’ll see several collapsible sections (headers). Here's what each layer reveals:
+
+---
+
+#### 📡 **Ethernet (Layer 2)**
+
+- Shows the **Source MAC Address** (Windows VM)
+- Shows the **Destination MAC Address** (Linux VM)
+- This is the **hardware-level** communication between devices
+
+---
+
+#### 🌍 **Internet Protocol (Layer 3)**
+
+- Displays the **Source IP Address**
+- Displays the **Destination IP Address**
+- This is how devices identify and route across networks
+
+---
+
+#### 💬 **ICMP Section**
+
+- Shows the **payload data** that was sent
+- Example: You’ll see a message like `32 bytes of data`
+- In the **right-hand panel**, you’ll find the actual raw data sent. In our case it begins with something like `abcd...`
+
+---
+
+> 💡 In tools like PowerShell, you only see basic ping responses. But in **Wireshark**, you can dive deep into the **packet structure**, view **payloads**, and inspect traffic in a way that's incredibly useful for network troubleshooting and analysis.
+
+> 🔍 *Exploring just the payload is only scratching the surface — Wireshark can uncover tons of detailed information for every protocol and interaction happening across your network.*
 </p>
 <br />
 <br />
