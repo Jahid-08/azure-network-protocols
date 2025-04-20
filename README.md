@@ -410,10 +410,69 @@ To stop the continuous ping in **PowerShell**, press: **Ctrl + C**
 
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img width="810" alt="image" src="https://github.com/user-attachments/assets/aa8609ea-ce71-4213-99af-0e5c232f11cf" />
+<img width="728" alt="image" src="https://github.com/user-attachments/assets/df3eeb28-952c-4264-9532-badc0fed13ca" />
 </p>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+### 🔐 Step 8: Observe SSH Traffic in Wireshark
+
+Now we’re going to observe **SSH traffic**, which is a secure protocol used to access and manage remote systems over an unsecured network.
+
+---
+
+#### 🔒 What is SSH?
+
+**SSH (Secure Shell)** encrypts the connection to ensure **privacy and data integrity** when accessing a remote system. It uses **port 22** by default and prevents sensitive data from being transmitted in plain text.
+
+---
+
+#### 📡 Start Capturing SSH Traffic in Wireshark
+
+1. On your **Windows VM**, open **Wireshark**.
+2. In the **filter bar**, type: **ssh**
+3. 3. Press **Enter** — the screen will likely be empty for now, since no SSH connection has occurred yet.
+
+---
+
+#### 🧑‍💻 SSH into the Linux VM
+
+1. Open **PowerShell** on the Windows VM.
+2. Type the following command to SSH into the Linux VM:
+   
+```powershell
+ssh labuser@10.1.0.5
+```
+You’ll be prompted with a yes/no confirmation to connect.
+
+Enter yes, then enter the password:Cyberlab123!
+
+#### 👀 What You’ll See
+
+- **SSH traffic** will immediately appear in **Wireshark**, even before logging in.
+- In **PowerShell**, the interface will change once you're inside the `linux-vm`.
+- Every command or keystroke typed will generate **encrypted SSH packets** in Wireshark.
+
+> 🔐 Since SSH encrypts data, you won't be able to see the **contents** of the payload — only that data is being transferred.
+
+---
+
+#### 📊 Dive Deeper into SSH Packets
+
+1. In Wireshark, click on one of the SSH packets.
+2. Expand the **Transmission Control Protocol (TCP)** section.
+3. You'll observe:
+   - **Source Port**
+   - **Destination Port**
+   - Flags and control information
+
+> 🧠 The **destination port** is `22` when traffic is sent **to** the Linux VM.  
+> When the Linux VM responds, **port 22 becomes the source** (replying from SSH).
+
+---
+
+> 💡 This is a simple demonstration of how SSH works — allowing secure, encrypted communication between devices across an unsecured network.
+
 </p>
 <br />
 <br />
