@@ -317,10 +317,92 @@ When you click on a captured packet in Wireshark, you’ll see several collapsib
 
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img width="934" alt="image" src="https://github.com/user-attachments/assets/d0367f6a-406b-4450-aeeb-e1f98ccc2ab7" />
 </p>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+### 🔥 Step 7: Configure a Firewall to Block ICMP Traffic
+
+In this step, we’ll simulate a network restriction by blocking **ICMP traffic** (ping) using a firewall rule on the `linux-vm`. We’ll observe how this impacts communication between the two VMs using **Wireshark** and **PowerShell**.
+
+---
+
+#### 🏓 Initiate a Non-Stop Ping from Windows to Linux
+
+1. On your Windows VM, open **PowerShell**.
+2. Start an infinite ping to the Linux VM:
+   ```powershell
+   ping 10.1.0.5 -t
+
+3. You should see continuous ping requests and replies.
+
+4. In Wireshark, ensure your filter is still set to: **icmp**
+
+🔁 This creates a non-stop exchange of ICMP traffic that you’ll see clearly in both Wireshark and PowerShell.
+
+#### 🛡️ Block ICMP Traffic Using Azure Firewall (NSG)
+
+Now we’ll block ICMP traffic from reaching the Linux VM by configuring an **Inbound Security Rule**.
+
+---
+
+##### 🧭 Steps to Access the Firewall (NSG)
+
+1. Go to the **Azure Portal**
+2. Navigate to:
+   - **Virtual Machines** > `linux-vm` > **Networking`
+3. Under **Network security group**, click the listed NSG (e.g., `linux-vm-nsg`)
+4. In the left-hand menu, go to:
+   - **Settings** > **Inbound security rules**
+5. Click **➕ Add** to create a new firewall rule
+
+---
+
+##### ⚙️ Configure the Inbound Rule
+
+Set the following values:
+
+- **Source:** `Any`
+- **Destination:** `Any`
+- **Destination port ranges:** `*` (means "any port")
+- **Protocol:** `ICMPv4`
+- **Action:** `Deny`
+- **Priority:** `290`
+- **Name:** `Deny-ICMP`
+
+Click **Add** to apply the rule.
+
+> 🚫 Once this rule is active, ICMP (ping) traffic coming **into** the Linux VM will be blocked.
+
+#### ✅ Re-Enable ICMP Traffic
+
+Now we’ll remove the firewall block to allow ICMP (ping) traffic to flow again.
+
+---
+
+##### 🔄 Delete the Firewall Rule
+
+1. Go back to the **Inbound security rules** section of your `linux-vm-nsg`.
+2. Locate the rule you created (e.g., `Deny-ICMP`).
+3. Click **Delete** to remove the rule.
+
+---
+
+##### 📶 Verify Connectivity is Restored
+
+- In **PowerShell**, ping responses will resume — no more timeouts.
+- In **Wireshark**, you'll once again see ICMP **request and reply** packets.
+
+---
+
+#### 🛑 Stop the Infinite Ping
+
+To stop the continuous ping in **PowerShell**, press: **Ctrl + C**
+
+> 💡 ICMP traffic is now unblocked, and communication between your VMs is fully restored.
+
+
+
 </p>
 <br />
 <br />
