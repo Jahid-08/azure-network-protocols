@@ -468,6 +468,7 @@ Enter yes, then enter the password:Cyberlab123!
 
 > 🧠 The **destination port** is `22` when traffic is sent **to** the Linux VM.  
 > When the Linux VM responds, **port 22 becomes the source** (replying from SSH).
+> If you want to exit the linux terminal simply type **exit** and you will be taken back to regular PowerShell.
 
 ---
 
@@ -480,11 +481,91 @@ Enter yes, then enter the password:Cyberlab123!
 
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img width="807" alt="image" src="https://github.com/user-attachments/assets/e19d6d6c-8102-41f0-b985-51ac9cab843e" />
 </p>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
+
+### 📦 Step 9: Observe DHCP Traffic in Wireshark
+
+In this step, we’ll observe **DHCP traffic** using Wireshark by releasing and renewing our Windows VM’s IP address — which will trigger the full **DORA** process.
+
+---
+
+#### ❓ What is DHCP?
+
+**DHCP (Dynamic Host Configuration Protocol)** is a network protocol that automatically assigns IP addresses and other configuration details (like DNS and gateway info) to devices on a network.
+
+---
+
+#### 🧪 Set Up DHCP Filtering in Wireshark
+
+1. In **Wireshark**, clear any existing filters.
+2. In the filter bar, type: **dhcp**
+3. Press **Enter** to begin filtering for DHCP traffic.
+
+---
+
+#### 📝 Create a Batch File to Run DHCP Commands
+
+We’ll use a script to run the release/renew process smoothly and ensure all **DORA** steps are captured.
+
+1. Open **Notepad**
+2. Go to: `File → Save As`
+3. In the save dialog:
+- Navigate to: `This PC > C:\ProgramData`
+- Set **File Name:** `dhcp.bat`
+- Set **Save as type:** `All Files (*.*)`
+
+4. Inside the notepad, type the following commands:
+```bat
+ipconfig /release
+ipconfig /renew
+```
+5. Save the file.
+
+> 🧾 A `.bat` (batch) file allows multiple commands to be executed in sequence — great for automating tasks like this.
+
+---
+
+#### 📁 Run the Batch Script
+
+1. Open **PowerShell** on the Windows VM.
+2. Change directory to where the script is saved:
+   ```powershell
+   cd C:\ProgramData
+Type **ls** to confirm the dhcp.bat file is there.
+
+Run the script: **.\dhcp.bat**
+⚠️ Running this script will temporarily kill your network connection, but it will quickly return once the DHCP lease is renewed.
+
+#### 🔁 What is the DORA Process?
+
+When a device needs an IP address, it goes through the **DORA** process:
+
+- **D – Discover**:  
+  The device sends out a broadcast message looking for available DHCP servers.
+
+- **O – Offer**:  
+  A DHCP server replies with an offer, which includes an available IP address and configuration details.
+
+- **R – Request**:  
+  The device sends a request back to the server, asking to use the offered IP address.
+
+- **A – Acknowledge**:  
+  The DHCP server sends an acknowledgment, officially assigning the IP address to the device.
+
+> 📡 This entire sequence can be observed in Wireshark when the batch script is executed.
+
+✅ Confirm the Result
+Once your VM reconnects, go back to PowerShell.
+
+Type: **ipconfig** and view the IP address.
+
+💡 In **Wireshark**, you can expand each DHCP packet to view detailed information — such as transaction IDs, lease times, and server identifiers. This level of visibility is why Wireshark is such a valuable tool for troubleshooting and learning how network protocols operate behind the scenes.
+
+
+
+   </p>
 <br />
 <br />
 <br />
