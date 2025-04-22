@@ -572,10 +572,59 @@ Type: **ipconfig** and view the IP address.
 
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img width="858" alt="image" src="https://github.com/user-attachments/assets/dc81954d-0a31-4d71-b08e-5428414edce7" />
 </p>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+### 🌐 Step 10: Observe DNS Traffic in Wireshark
+
+Now we’ll analyze **DNS traffic** — the system that translates website names into IP addresses — using Wireshark.
+
+---
+
+#### ❓ What is DNS?
+
+**DNS (Domain Name System)** is like the **phonebook of the internet**. It translates **human-readable domain names** (like `disney.com`) into **IP addresses** that computers use to locate and communicate with each other.
+
+---
+
+#### 🔍 Filter DNS Traffic in Wireshark
+
+1. Open **Wireshark** on your Windows VM.
+2. In the filter bar, type: **dns**
+3. Press **Enter** — unlike some other filters, you may immediately see traffic as the VM communicates with its DNS server.
+
+---
+
+#### 🧪 Generate DNS Traffic Using `nslookup`
+
+Let’s now generate DNS queries manually using PowerShell.
+
+---
+
+#### ❓ What is `nslookup`?
+
+**`nslookup`** is a command-line tool used to **query DNS servers** for information about domain names or IP addresses.
+
+---
+
+#### 💻 Run a DNS Query in PowerShell
+
+1. Open **PowerShell**.
+2. Type the following command:
+```powershell
+nslookup disney.com
+```
+3. You should see one or more **IP addresses** returned for `disney.com`.
+
+---
+
+#### 📡 What You’ll See in Wireshark
+
+- Wireshark will display the **DNS query** sent from your VM to the DNS server.
+- You’ll also see the **DNS response**, which includes the resolved IP address(es) for `disney.com`.
+
+> 💡 DNS makes it possible to visit websites by name rather than memorizing complex IP addresses — just like using a contact name in your phone instead of dialing the number directly.
 </p>
 <br />
 <br />
