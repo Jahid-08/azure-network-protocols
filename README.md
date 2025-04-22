@@ -632,53 +632,46 @@ nslookup disney.com
 
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img width="860" alt="image" src="https://github.com/user-attachments/assets/aed8551b-be1b-440d-bc1a-e69e238e8752" />
 </p>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
-<br />
-<br />
 
+### 🖥️ Step 11: Observe RDP Traffic in Wireshark
 
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
-<br />
-<br />
+In this final step, we’ll observe **RDP traffic**, which we’ve actually been using the entire time to interact with our Windows VM through Remote Desktop.
 
+---
 
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
-<br />
-<br />
+#### ❓ What is RDP?
 
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
-<br />
-<br />
+**RDP (Remote Desktop Protocol)** is a Microsoft protocol that allows users to **remotely connect and control another computer** over a network.  
+It uses **TCP port 3389**.
 
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+---
+
+#### 🔍 Filter RDP Traffic in Wireshark
+
+1. Open **Wireshark** on your Windows VM.
+2. In the filter bar, type: **tcp.port == 3389**
+3. Press **Enter**.
+
+> 🎯 Port 3389 is the default port for RDP. This filtering method can also be used for any other protocol if you know its port number.
+
+---
+
+#### 📡 What You’ll See in Wireshark
+
+- Immediately, you’ll notice **non-stop traffic** flowing through Wireshark.
+- That’s because **RDP constantly streams live visuals** from one machine to another — even if you're not clicking or typing.
+
+---
+
+#### 🌐 Source and Destination Insight
+
+- Look at the IP addresses in the captured packets.
+- You’ll see:
+- Your **public IP address** (from your physical machine)
+- Making a connection to the **IP address of your `windows-vm`**
+
+> 💡 This constant traffic shows how RDP maintains a persistent and live session between your device and the cloud VM.
 </p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
-<br />
-<br />
